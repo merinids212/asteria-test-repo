@@ -1,110 +1,206 @@
 .panel {
   position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 320px;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 24px;
+  top: 0;
+  right: 0;
+  width: 360px;
+  height: 100vh;
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0;
   color: white;
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  box-shadow: -8px 0 40px rgba(0, 0, 0, 0.5);
   z-index: 1000;
-  transition: transform 0.2s ease;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
 }
 
-.panel:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+.panel.collapsed {
+  transform: translateX(320px);
 }
 
 .header {
+  padding: 32px 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, rgba(102, 126, 234, 0.05) 0%, transparent 100%);
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logoMark {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+}
+
+.logoLines {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 20px;
+}
+
+.logoLines span {
+  height: 2px;
+  background: white;
+  border-radius: 1px;
+  display: block;
+}
+
+.logoLines span:nth-child(1) {
+  width: 100%;
+}
+
+.logoLines span:nth-child(2) {
+  width: 70%;
+}
+
+.logoLines span:nth-child(3) {
+  width: 40%;
+}
+
+.titleSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .title {
   margin: 0;
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: -0.5px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.brandMark {
-  width: 36px;
-  height: 36px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+.subtitle {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.collapseButton {
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
-  font-weight: 700;
+  font-family: inherit;
+}
+
+.collapseButton:hover {
+  background: rgba(255, 255, 255, 0.1);
   color: white;
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .controls {
+  padding: 28px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 28px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.controls::-webkit-scrollbar {
+  width: 6px;
+}
+
+.controls::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.controls::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.controls::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .controlGroup {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 }
 
 .label {
   display: flex;
   justify-content: space-between;
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.8);
-  letter-spacing: 0.2px;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .value {
   color: #667eea;
-  font-weight: 600;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
+  font-size: 13px;
+  text-transform: none;
 }
 
 .slider {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 2px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
   outline: none;
-  transition: background 0.2s ease;
-}
-
-.slider:hover {
-  background: rgba(255, 255, 255, 0.15);
+  position: relative;
+  cursor: pointer;
 }
 
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-radius: 50%;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.5);
   transition: transform 0.2s ease;
 }
 
 .slider::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.6);
 }
 
 .slider::-webkit-slider-thumb:active {
@@ -112,67 +208,74 @@
 }
 
 .slider::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-radius: 50%;
   border: none;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.5);
   transition: transform 0.2s ease;
 }
 
 .slider::-moz-range-thumb:hover {
-  transform: scale(1.2);
+  transform: scale(1.15);
 }
 
-.select {
-  width: 100%;
+.buttonGroup {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.modeButton {
   padding: 10px 12px;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
-  color: white;
-  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 11px;
+  font-weight: 600;
   font-family: inherit;
   cursor: pointer;
   transition: all 0.2s ease;
-  outline: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.select:hover {
+.modeButton:hover {
   background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.8);
 }
 
-.select:focus {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: #667eea;
-}
-
-.select option {
-  background: #1a1a1a;
+.modeButton.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: transparent;
   color: white;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
 .colorGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+  gap: 10px;
 }
 
 .colorButton {
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 12px;
-  font-weight: 500;
-  font-family: inherit;
+  padding: 0;
+  height: 56px;
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  font-family: inherit;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 12px;
 }
 
 .colorButton::before {
@@ -181,75 +284,78 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
-  opacity: 0;
-  transition: opacity 0.2s ease;
+  bottom: 0;
+  background: inherit;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
 }
 
-.colorButton[data-scheme="aurora"]::before {
-  background: linear-gradient(90deg, #667eea, #764ba2, #00d4ff);
-}
-
-.colorButton[data-scheme="neon"]::before {
-  background: linear-gradient(90deg, #ff006e, #ffbe0b);
-}
-
-.colorButton[data-scheme="monochrome"]::before {
-  background: linear-gradient(90deg, #ffffff, #cccccc);
-}
-
-.colorButton[data-scheme="asteria"]::before {
-  background: linear-gradient(90deg, #667eea, #764ba2);
-}
-
-.colorButton:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
-  color: white;
+.colorButton:hover::before {
+  opacity: 1;
 }
 
 .colorButton.active {
-  background: rgba(102, 126, 234, 0.2);
-  border-color: #667eea;
-  color: white;
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.5);
+  transform: translateY(-2px);
 }
 
-.colorButton.active::before {
-  opacity: 1;
+.colorLabel {
+  position: relative;
+  z-index: 1;
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .toggleLabel {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 13px;
+  gap: 12px;
+  font-size: 12px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
   user-select: none;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+}
+
+.toggleLabel:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .checkbox {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   appearance: none;
   -webkit-appearance: none;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
   cursor: pointer;
   position: relative;
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 .checkbox:hover {
   background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 .checkbox:checked {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-color: #667eea;
+  border-color: transparent;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
 }
 
 .checkbox:checked::after {
@@ -259,28 +365,30 @@
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
 }
 
 .resetButton {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   margin-top: 8px;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
   color: rgba(255, 255, 255, 0.7);
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 600;
   font-family: inherit;
   cursor: pointer;
   transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .resetButton:hover {
   background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.15);
   color: white;
 }
 
@@ -289,34 +397,68 @@
 }
 
 .footer {
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 24px 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.footerBrand {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
   text-align: center;
 }
 
 .footerText {
   font-size: 11px;
   color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 1px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.footerYear {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.25);
   letter-spacing: 0.5px;
-  font-weight: 500;
 }
 
 /* Mobile responsive */
 @media (max-width: 768px) {
   .panel {
-    top: 10px;
-    right: 10px;
-    left: 10px;
-    width: auto;
-    padding: 20px;
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+    top: auto;
+    bottom: 0;
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px 20px 0 0;
+  }
+
+  .panel.collapsed {
+    transform: translateY(calc(100% - 80px));
+  }
+
+  .header {
+    padding: 20px 24px;
   }
 
   .title {
-    font-size: 18px;
+    font-size: 20px;
+  }
+
+  .controls {
+    padding: 20px 24px;
+    max-height: 50vh;
   }
 
   .colorGrid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .buttonGroup {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

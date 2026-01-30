@@ -8,7 +8,7 @@ export default function Home() {
     speed: 1.0,
     density: 100,
     colorScheme: 'aurora',
-    animationMode: 'flow',
+    animationMode: 'logo',
     cameraRotate: true,
     glowIntensity: 0.7
   });
@@ -16,12 +16,13 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Asteria - Animated Visualization</title>
-        <meta name="description" content="Mesmerizing Three.js animated lines visualization" />
+        <title>Asteria - Since 1858</title>
+        <meta name="description" content="Asteria geometric visualization inspired by timeless design" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main style={{ margin: 0, padding: 0, overflow: 'hidden' }}>
+      <main style={{ margin: 0, padding: 0, overflow: 'hidden', background: '#0a0a0a' }}>
         <AnimatedLines {...controls} />
         <ControlPanel onChange={setControls} />
       </main>

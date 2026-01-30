@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import Head from 'next/head';
-import AnimatedLines from '../components/AnimatedLines';
+import dynamic from 'next/dynamic';
 import ControlPanel from '../components/ControlPanel';
+
+const AnimatedLines = dynamic(() => import('../components/AnimatedLines'), {
+  ssr: false,
+});
 
 export default function Home() {
   const [controls, setControls] = useState({

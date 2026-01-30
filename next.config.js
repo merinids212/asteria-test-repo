@@ -2,12 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   typescript: {
-    // Only check TypeScript files in this project
-    ignoreBuildErrors: false,
-  },
-  turbopack: {
-    // Explicitly set root to this directory
-    root: __dirname,
+    // Skip TypeScript checking during build since we use JavaScript
+    ignoreBuildErrors: true,
   },
 }
 

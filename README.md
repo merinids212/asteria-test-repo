@@ -1,5 +1,6 @@
-# Asteria Test Repository
+# Horse Clip Clop
 
-Created: 2026-01-29
+A Pen created on CodePen.
 
-A test repository for the Asteria project.
+Original URL: [https://codepen.io/jaymar-g-aranas/pen/bGdRrQa](https://codepen.io/jaymar-g-aranas/pen/bGdRrQa).
+

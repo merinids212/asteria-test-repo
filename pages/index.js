@@ -1,35 +1,58 @@
-import { useState } from 'react';
 import Head from 'next/head';
-import dynamic from 'next/dynamic';
-import ControlPanel from '../components/ControlPanel';
-
-const AnimatedLines = dynamic(() => import('../components/AnimatedLines'), {
-  ssr: false,
-});
+import Link from 'next/link';
 
 export default function Home() {
-  const [controls, setControls] = useState({
-    speed: 1.0,
-    density: 100,
-    colorScheme: 'aurora',
-    animationMode: 'logo',
-    cameraRotate: true,
-    glowIntensity: 0.7
-  });
-
   return (
     <>
       <Head>
-        <title>Asteria - Since 1858</title>
-        <meta name="description" content="Asteria geometric visualization inspired by timeless design" />
+        <title>Horse Animations</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main style={{ margin: 0, padding: 0, overflow: 'hidden', background: '#0a0a0a' }}>
-        <AnimatedLines {...controls} />
-        <ControlPanel onChange={setControls} />
+      <main>
+        <h1>Horse Animations</h1>
+        <div className="links">
+          <a href="/horse1/">Horse 1 - Clip Clop</a>
+          <a href="/horse2/">Horse 2 - Night Mare</a>
+        </div>
       </main>
+
+      <style jsx>{`
+        main {
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+          color: #fff;
+        }
+        h1 {
+          margin-bottom: 2rem;
+          font-size: 2.5rem;
+          font-weight: 300;
+        }
+        .links {
+          display: flex;
+          gap: 2rem;
+        }
+        a {
+          display: block;
+          padding: 1.5rem 3rem;
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 12px;
+          color: #fff;
+          text-decoration: none;
+          font-size: 1.25rem;
+          transition: all 0.3s ease;
+        }
+        a:hover {
+          background: rgba(255, 255, 255, 0.2);
+          transform: translateY(-4px);
+        }
+      `}</style>
     </>
   );
 }

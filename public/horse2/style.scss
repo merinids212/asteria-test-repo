@@ -1,0 +1,200 @@
+body {
+  margin: 0;
+  padding: 0;
+  width:100vw;
+  height:100vh;
+  background:#fff;
+  transition:0.5s ease-in-out;
+  cursor:pointer;
+  #toggle{
+    position:absolute;
+    z-index:999;
+    width:640px;
+    height:480px;
+    left:calc(50% - 320px);
+    top:calc(50% - 240px);
+    opacity:0;
+    transition:0.5s ease-in-out;
+    &:after{
+      content:'💡';
+      position:absolute;
+      right:20px;
+      top:20px;
+      z-index:9;
+      font-size:30px;
+      width:50px;
+      height:50px;
+      background:#000;
+      display:flex;
+      justify-content:center;
+      transition:0.5s ease-in-out;
+      align-items:center;
+      border-radius:100%;
+      box-shadow:inset 0 0 0 2px #000, inset 0 0 0 3px #f8f660, 0 5px 10px #000;
+    }
+  }
+  #blur{
+    width:300px;
+    height:500px;
+    position:absolute;
+    z-index:1;
+    backdrop-filter:blur(30px);
+    border-radius:100%;
+    -webkit-mask:radial-gradient(ellipse at center, #000 35%, transparent 65%);
+    left:calc(50% - 150px);
+    top:calc(50% - 100px);
+    transform:translate(calc(var(--x) * -1px),calc(var(--y) * -1px));
+    transition:opacity 0.5s ease-in-out;
+    opacity:0;
+    background:rgba(255,255,255,0.25);
+  }
+  &:after{
+    content:'';
+    position:absolute;
+    width:100vw;
+    height:100vh;
+    background:#fff;
+    z-index:9;
+    left:0;
+    top:0;
+    transition:opacity 0.5s ease-in-out;
+  }
+  &:before{
+    content:'click anywhere or touch the toggle to enter night mare';
+    color:#000;
+    transition:0.5s ease-in-out;
+    transition-delay:0.5s;
+    width:100%;
+    position:absolute;
+    top:calc(50% + 300px);
+    left:0;
+    text-align:center;
+    font-family:Futura, sans-serif;
+    font-size:12px;
+  }
+  &.loaded{
+    #toggle{
+      opacity:1;
+    }
+    &:after{
+      opacity:0;
+    }
+  }
+  &.showhand{
+    #hand{
+      opacity:1;
+      transition-delay:0s;
+    }
+  }
+  #hand{
+      width:640px;
+      height:480px;
+      position:absolute;
+      left:50%;
+      top:50%;
+      z-index:999;
+      transform:translate(-50%, -50%);
+    opacity:0;
+    transition:opacity 0.5s ease-in-out;
+    transition-delay:0.5s;
+    &:before{
+      content:'✋';
+      font-size:25px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      filter:saturate(0);
+      position:absolute;
+      width:40px;
+      height:40px;
+      border-radius:100%;
+      left:calc(50% + 320px);
+      top:calc(50% - 450px);
+      transform:translate(calc(var(--handx) * -1px),calc(var(--handy) * 1px));
+      z-index:999;
+      box-shadow:0 0 0 2px #fff;
+    }
+   }
+  #container{
+    filter: drop-shadow(0 -0px 10px rgb(255, 255, 255));
+    position:absolute;
+    width:100vw;
+    height:100vh;
+    left:0;
+    top:0;
+    z-index:2;
+    transform:scaleX(-1);
+    &:before{
+      content:'';
+      position:absolute;
+      width:100%;
+      height:100%;
+      left:0;
+      top:0;
+      z-index:999;
+      backdrop-filter:blur(10px);
+    }
+  }
+  canvas{
+    opacity:0;
+    z-index:3;
+    filter:blur(8px);
+    transform:translate(-50%, calc(-50% - 300px));
+    transition:0.5s ease-in-out, filter 1s ease-in-out;
+  }
+  video{
+    transition:0.5s ease-in-out;
+  }
+  &.lightsout{
+    background:#000;
+    #toggle{
+      &:after{
+        filter:hue-rotate(120deg) saturate(0);
+        background:#fff;
+         box-shadow:inset 0 0 0 2px #fff, inset 0 0 0 3px #f8f660, 0 5px 10px #000;
+      }
+    }
+    #blur{
+      opacity:1;
+    }
+    &:before{
+      content:'click anywhere or touch the toggle to exit night mare';
+      color:#fff;
+    }
+    video{
+       filter:saturate(0) brightness(0.5) contrast(2) blur(2px);
+       box-shadow:0 0 0 20px #000, 0 0 0 21px #fff;
+    }
+    canvas{
+      transform:translate(-50%, -50%);
+      opacity:0.35;
+      filter:blur(1px);
+    }
+  }
+}
+canvas, video {
+  display: block;
+  width:800px;
+  height:560px;
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%, -50%) scaleX(-1);
+  z-index:2;
+}
+
+canvas{
+  transform:translate(-50%, -50%)
+}
+
+
+
+canvas{
+  opacity:0.5;
+}
+
+video{
+  z-index:0;
+  box-shadow:0 20px 40px -20px #000, 0 0 0 #fff;
+}
+

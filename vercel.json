@@ -1,11 +1,5 @@
 {
   "framework": "nextjs",
   "buildCommand": "next build --webpack",
-  "installCommand": "npm install",
-  "rewrites": [
-    { "source": "/horse1", "destination": "/horse1/index.html" },
-    { "source": "/horse1/", "destination": "/horse1/index.html" },
-    { "source": "/horse2", "destination": "/horse2/index.html" },
-    { "source": "/horse2/", "destination": "/horse2/index.html" }
-  ]
+  "installCommand": "npm install"
 }

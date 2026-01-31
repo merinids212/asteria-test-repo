@@ -18,12 +18,12 @@ export default function Home() {
           </div>
 
           <nav className="links">
-            <a href="/horse1/">
+            <a href="/horse1/index.html">
               <span className="num">01</span>
               <span className="name">CLIP CLOP</span>
               <span className="tag">CSS</span>
             </a>
-            <a href="/horse2/">
+            <a href="/horse2/index.html">
               <span className="num">02</span>
               <span className="name">NIGHT MARE</span>
               <span className="tag">P5.JS</span>

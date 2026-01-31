@@ -28,6 +28,11 @@ export default function Home() {
               <span className="name">NIGHT MARE</span>
               <span className="tag">P5.JS</span>
             </a>
+            <a href="/tiger/index.html">
+              <span className="num">03</span>
+              <span className="name">TIGER TIME</span>
+              <span className="tag">CSS</span>
+            </a>
           </nav>
 
           <footer>

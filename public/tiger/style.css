@@ -2,6 +2,7 @@
 /*
   Tiger Run - CSS Animation
   Based on horse anatomy technique, rebuilt for feline form
+  Updated with improved leg anatomy and natural feline movement
   Click the tiger for slow-mo :)
 */
 
@@ -22,6 +23,8 @@
   --color-nose: #2a1810;
   --color-eyes: #FFD700;
   --color-paws: #C45E0A;
+  --color-paw-pad: #3a2820;
+  --color-claws: #e8e0d0;
   --color-dust: #AF540B;
   --color-floor: transparent;
 }
@@ -461,249 +464,521 @@ label {
 }
 
 /* ================
-   FRONT LEGS
+   FRONT LEGS - Improved with overlapping joints, better proportions, toe definition
    ================ */
 
 .front-leg {
-  --part-width: 12%;
-  --part-height: 45%;
-  --part-y: 38%;
+  --part-width: 14%;  /* Slightly wider for more muscular look */
+  --part-height: 48%;  /* Taller for proper proportions */
+  --part-y: 36%;
   --part-origin: 50% 0%;
   z-index: 1;
 }
 
 .front-leg.right {
-  --part-x: 15%;
+  --part-x: 14%;
   z-index: 0;
 }
 
 .front-leg.left {
-  --part-x: 22%;
+  --part-x: 21%;
   z-index: 3;
 }
 
+/* Shoulder - larger, more muscular */
 .front-leg .shoulder {
-  --shape-width: 100%;
-  --shape-height: 50%;
-  --shape-radius: 50% 50% 40% 40%;
-}
-
-.front-leg .upper {
-  --shape-width: 70%;
+  --shape-width: 110%;  /* Overlap for seamless connection */
   --shape-height: 55%;
-  --shape-x: 15%;
-  --shape-y: 35%;
-  --shape-radius: 40%;
+  --shape-x: -5%;
+  --shape-radius: 55% 50% 45% 50%;
+  box-shadow: inset 3px 3px 10px rgba(245, 165, 74, 0.4), inset -3px -3px 10px rgba(139, 69, 10, 0.5);
+}
+
+/* Muscle definition on shoulder */
+.front-leg .shoulder:after {
+  content: '';
+  width: 60%;
+  height: 40%;
+  top: 20%;
+  left: 20%;
+  background: linear-gradient(135deg, var(--color-fur-light) 0%, transparent 100%);
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+/* Upper leg - overlaps with shoulder and elbow */
+.front-leg .upper {
+  --shape-width: 75%;
+  --shape-height: 60%;
+  --shape-x: 12%;
+  --shape-y: 32%;  /* Overlaps with shoulder */
+  --shape-radius: 45% 40% 35% 40%;
   --shape-origin: 50% 0%;
 }
 
+/* Elbow - larger, positioned to connect segments */
 .front-leg .elbow {
-  --shape-width: 55%;
-  --shape-height: 20%;
-  --shape-x: 22%;
-  --shape-y: 80%;
+  --shape-width: 60%;
+  --shape-height: 25%;
+  --shape-x: 20%;
+  --shape-y: 75%;  /* Overlaps with upper and lower */
   --shape-radius: 50%;
 }
 
+/* Lower leg - overlaps elbow and wrist */
 .front-leg .lower {
-  --shape-width: 45%;
-  --shape-height: 50%;
-  --shape-x: 28%;
-  --shape-y: 90%;
-  --shape-radius: 35%;
+  --shape-width: 50%;
+  --shape-height: 55%;
+  --shape-x: 25%;
+  --shape-y: 85%;  /* Overlaps with elbow */
+  --shape-radius: 40% 35% 30% 35%;
   --shape-origin: 50% 0%;
 }
 
+/* Wrist - connects lower leg to paw */
 .front-leg .wrist {
-  --shape-width: 40%;
-  --shape-height: 15%;
-  --shape-x: 30%;
-  --shape-y: 130%;
-  --shape-radius: 50%;
-}
-
-.front-leg .paw {
-  --shape-width: 55%;
+  --shape-width: 45%;
   --shape-height: 18%;
-  --shape-x: 22%;
-  --shape-y: 140%;
-  --shape-radius: 45% 45% 40% 40%;
-  background: linear-gradient(180deg, var(--color-fur-dark) 0%, var(--color-paws) 100%);
-}
-
-.front-leg .toes {
-  --shape-width: 60%;
-  --shape-height: 30%;
-  --shape-x: 20%;
-  --shape-y: 60%;
+  --shape-x: 28%;
+  --shape-y: 125%;  /* Overlaps with lower leg */
   --shape-radius: 50%;
-  background: var(--color-paws);
 }
 
+/* Paw - larger, more detailed */
+.front-leg .paw {
+  --shape-width: 60%;
+  --shape-height: 22%;
+  --shape-x: 20%;
+  --shape-y: 135%;  /* Overlaps with wrist */
+  --shape-radius: 50% 50% 45% 45%;
+  background: linear-gradient(180deg, var(--color-fur-dark) 0%, var(--color-paws) 60%, var(--color-paw-pad) 100%);
+}
+
+/* Toe definition with individual toes */
+.front-leg .toes {
+  --shape-width: 18%;
+  --shape-height: 25%;
+  --shape-x: 18%;
+  --shape-y: 148%;
+  --shape-radius: 50% 50% 40% 40%;
+  background: var(--color-paws);
+  box-shadow: 
+    12px 0 0 var(--color-paws),
+    24px -2px 0 var(--color-paws),
+    36px 0 0 var(--color-paws) !important;
+}
+
+/* Claws */
+.front-leg .toes:after {
+  content: '';
+  width: 8%;
+  height: 12%;
+  top: 70%;
+  left: 5%;
+  background: var(--color-claws);
+  border-radius: 50% 50% 30% 30%;
+  box-shadow: 
+    12px 0 0 var(--color-claws),
+    24px -2px 0 var(--color-claws),
+    36px 0 0 var(--color-claws) !important;
+}
+
+/* Pad detail on paw */
+.front-leg .paw:after {
+  content: '';
+  width: 50%;
+  height: 50%;
+  bottom: 5%;
+  left: 25%;
+  background: var(--color-paw-pad);
+  border-radius: 40%;
+  opacity: 0.8;
+}
+
+/* Front leg animations - staggered timing for feline slink */
 .animate .front-leg.right .shoulder {
-  animation: front-shoulder-r var(--speed) infinite linear;
+  animation: front-shoulder-r var(--speed) infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .animate .front-leg.left .shoulder {
-  animation: front-shoulder-l var(--speed) infinite linear;
+  animation: front-shoulder-l var(--speed) infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes front-shoulder-r {
   0%, 100% { transform: rotate(25deg); }
-  25% { transform: rotate(-30deg); }
+  20% { transform: rotate(5deg); }
+  35% { transform: rotate(-30deg); }
   50% { transform: rotate(25deg); }
-  75% { transform: rotate(-30deg); }
+  70% { transform: rotate(5deg); }
+  85% { transform: rotate(-30deg); }
 }
 
 @keyframes front-shoulder-l {
   0%, 100% { transform: rotate(-30deg); }
-  25% { transform: rotate(25deg); }
+  20% { transform: rotate(-10deg); }
+  35% { transform: rotate(25deg); }
   50% { transform: rotate(-30deg); }
-  75% { transform: rotate(25deg); }
+  70% { transform: rotate(-10deg); }
+  85% { transform: rotate(25deg); }
 }
 
-.animate .front-leg .upper {
-  animation: front-upper var(--speed) infinite linear;
+/* Upper leg follows shoulder with slight delay effect */
+.animate .front-leg.right .upper {
+  animation: front-upper-r var(--speed) infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes front-upper {
-  0%, 50%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(15deg); }
-  75% { transform: rotate(15deg); }
+.animate .front-leg.left .upper {
+  animation: front-upper-l var(--speed) infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.animate .front-leg .lower {
-  animation: front-lower var(--speed) infinite linear;
+@keyframes front-upper-r {
+  0%, 100% { transform: rotate(-5deg); }
+  25% { transform: rotate(10deg); }
+  50% { transform: rotate(-5deg); }
+  75% { transform: rotate(10deg); }
 }
 
-@keyframes front-lower {
-  0%, 100% { transform: rotate(-20deg); }
-  25% { transform: rotate(30deg); }
-  50% { transform: rotate(-20deg); }
-  75% { transform: rotate(30deg); }
+@keyframes front-upper-l {
+  0%, 100% { transform: rotate(10deg); }
+  25% { transform: rotate(-5deg); }
+  50% { transform: rotate(10deg); }
+  75% { transform: rotate(-5deg); }
+}
+
+/* Lower leg with more dynamic movement */
+.animate .front-leg.right .lower {
+  animation: front-lower-r var(--speed) infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate .front-leg.left .lower {
+  animation: front-lower-l var(--speed) infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes front-lower-r {
+  0%, 100% { transform: rotate(-15deg); }
+  15% { transform: rotate(-25deg); }
+  30% { transform: rotate(25deg); }
+  50% { transform: rotate(-15deg); }
+  65% { transform: rotate(-25deg); }
+  80% { transform: rotate(25deg); }
+}
+
+@keyframes front-lower-l {
+  0%, 100% { transform: rotate(25deg); }
+  15% { transform: rotate(35deg); }
+  30% { transform: rotate(-15deg); }
+  50% { transform: rotate(25deg); }
+  65% { transform: rotate(35deg); }
+  80% { transform: rotate(-15deg); }
+}
+
+/* Paw flex on ground contact */
+.animate .front-leg.right .paw {
+  animation: front-paw-r var(--speed) infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate .front-leg.left .paw {
+  animation: front-paw-l var(--speed) infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes front-paw-r {
+  0%, 100% { transform: rotate(10deg) scaleY(1); }
+  25% { transform: rotate(-15deg) scaleY(0.9); }  /* Ground contact - compress */
+  35% { transform: rotate(-5deg) scaleY(1); }
+  50% { transform: rotate(10deg) scaleY(1); }
+  75% { transform: rotate(-15deg) scaleY(0.9); }
+  85% { transform: rotate(-5deg) scaleY(1); }
+}
+
+@keyframes front-paw-l {
+  0%, 100% { transform: rotate(-15deg) scaleY(0.9); }
+  25% { transform: rotate(10deg) scaleY(1); }
+  35% { transform: rotate(5deg) scaleY(1); }
+  50% { transform: rotate(-15deg) scaleY(0.9); }
+  75% { transform: rotate(10deg) scaleY(1); }
+  85% { transform: rotate(5deg) scaleY(1); }
+}
+
+/* Toe spread on ground contact */
+.animate .front-leg.right .toes {
+  animation: front-toes-r var(--speed) infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate .front-leg.left .toes {
+  animation: front-toes-l var(--speed) infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes front-toes-r {
+  0%, 100% { transform: scaleX(1); }
+  25% { transform: scaleX(1.15); }  /* Spread on contact */
+  50% { transform: scaleX(1); }
+  75% { transform: scaleX(1.15); }
+}
+
+@keyframes front-toes-l {
+  0%, 100% { transform: scaleX(1.15); }
+  25% { transform: scaleX(1); }
+  50% { transform: scaleX(1.15); }
+  75% { transform: scaleX(1); }
 }
 
 /* ================
-   BACK LEGS
+   BACK LEGS - Improved with overlapping joints, powerful haunches, toe definition
    ================ */
 
 .back-leg {
-  --part-width: 15%;
-  --part-height: 50%;
-  --part-y: 32%;
+  --part-width: 17%;  /* Wider for powerful hindquarters */
+  --part-height: 52%;  /* Taller for proper proportions */
+  --part-y: 30%;
   --part-origin: 50% 0%;
   z-index: 1;
 }
 
 .back-leg.right {
-  --part-x: 58%;
+  --part-x: 56%;
   z-index: 0;
 }
 
 .back-leg.left {
-  --part-x: 52%;
+  --part-x: 50%;
   z-index: 3;
 }
 
+/* Hip - large and powerful */
 .back-leg .hip {
-  --shape-width: 100%;
-  --shape-height: 45%;
-  --shape-radius: 55% 50% 45% 50%;
+  --shape-width: 110%;
+  --shape-height: 50%;
+  --shape-x: -5%;
+  --shape-radius: 60% 55% 50% 55%;
+  box-shadow: inset 4px 4px 12px rgba(245, 165, 74, 0.4), inset -4px -4px 12px rgba(139, 69, 10, 0.5);
 }
 
+/* Muscle definition on hip */
+.back-leg .hip:after {
+  content: '';
+  width: 50%;
+  height: 45%;
+  top: 15%;
+  left: 25%;
+  background: linear-gradient(135deg, var(--color-fur-light) 0%, transparent 100%);
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+/* Thigh - powerful, overlaps with hip */
 .back-leg .thigh {
-  --shape-width: 80%;
-  --shape-height: 55%;
-  --shape-x: 10%;
-  --shape-y: 30%;
-  --shape-radius: 50% 45% 40% 45%;
+  --shape-width: 90%;
+  --shape-height: 60%;
+  --shape-x: 5%;
+  --shape-y: 28%;  /* Overlaps with hip */
+  --shape-radius: 55% 50% 45% 50%;
   --shape-origin: 50% 0%;
 }
 
+/* Knee - connects thigh to lower leg */
 .back-leg .knee {
-  --shape-width: 50%;
-  --shape-height: 20%;
-  --shape-x: 25%;
-  --shape-y: 75%;
+  --shape-width: 55%;
+  --shape-height: 22%;
+  --shape-x: 22%;
+  --shape-y: 70%;  /* Overlaps both segments */
   --shape-radius: 50%;
 }
 
+/* Lower leg - overlaps knee and ankle */
 .back-leg .lower-leg {
-  --shape-width: 40%;
-  --shape-height: 55%;
-  --shape-x: 30%;
-  --shape-y: 85%;
-  --shape-radius: 35%;
+  --shape-width: 45%;
+  --shape-height: 58%;
+  --shape-x: 28%;
+  --shape-y: 80%;  /* Overlaps with knee */
+  --shape-radius: 40% 35% 30% 35%;
   --shape-origin: 50% 0%;
 }
 
+/* Ankle - connects to paw */
 .back-leg .ankle {
-  --shape-width: 35%;
-  --shape-height: 15%;
-  --shape-x: 32%;
-  --shape-y: 130%;
+  --shape-width: 40%;
+  --shape-height: 18%;
+  --shape-x: 30%;
+  --shape-y: 125%;  /* Overlaps with lower leg */
   --shape-radius: 50%;
 }
 
+/* Paw - detailed with toe definition */
 .back-leg .paw {
-  --shape-width: 50%;
-  --shape-height: 16%;
-  --shape-x: 25%;
-  --shape-y: 140%;
-  --shape-radius: 45% 45% 40% 40%;
-  background: linear-gradient(180deg, var(--color-fur-dark) 0%, var(--color-paws) 100%);
-}
-
-.back-leg .toes {
   --shape-width: 55%;
-  --shape-height: 30%;
+  --shape-height: 20%;
   --shape-x: 22%;
-  --shape-y: 60%;
-  --shape-radius: 50%;
-  background: var(--color-paws);
+  --shape-y: 135%;  /* Overlaps with ankle */
+  --shape-radius: 50% 50% 45% 45%;
+  background: linear-gradient(180deg, var(--color-fur-dark) 0%, var(--color-paws) 60%, var(--color-paw-pad) 100%);
 }
 
+/* Toe definition for back paws */
+.back-leg .toes {
+  --shape-width: 16%;
+  --shape-height: 22%;
+  --shape-x: 18%;
+  --shape-y: 148%;
+  --shape-radius: 50% 50% 40% 40%;
+  background: var(--color-paws);
+  box-shadow: 
+    10px 0 0 var(--color-paws),
+    20px -2px 0 var(--color-paws),
+    30px 0 0 var(--color-paws) !important;
+}
+
+/* Claws on back paws */
+.back-leg .toes:after {
+  content: '';
+  width: 7%;
+  height: 10%;
+  top: 65%;
+  left: 5%;
+  background: var(--color-claws);
+  border-radius: 50% 50% 30% 30%;
+  box-shadow: 
+    10px 0 0 var(--color-claws),
+    20px -2px 0 var(--color-claws),
+    30px 0 0 var(--color-claws) !important;
+}
+
+/* Pad detail on back paw */
+.back-leg .paw:after {
+  content: '';
+  width: 45%;
+  height: 45%;
+  bottom: 8%;
+  left: 28%;
+  background: var(--color-paw-pad);
+  border-radius: 40%;
+  opacity: 0.8;
+}
+
+/* Back leg animations - staggered for feline power and grace */
 .animate .back-leg.right .hip {
-  animation: back-hip-r var(--speed) infinite linear;
+  animation: back-hip-r var(--speed) infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .animate .back-leg.left .hip {
-  animation: back-hip-l var(--speed) infinite linear;
+  animation: back-hip-l var(--speed) infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes back-hip-r {
   0%, 100% { transform: rotate(-25deg); }
-  25% { transform: rotate(35deg); }
+  18% { transform: rotate(-5deg); }
+  35% { transform: rotate(40deg); }
   50% { transform: rotate(-25deg); }
-  75% { transform: rotate(35deg); }
+  68% { transform: rotate(-5deg); }
+  85% { transform: rotate(40deg); }
 }
 
 @keyframes back-hip-l {
-  0%, 100% { transform: rotate(35deg); }
-  25% { transform: rotate(-25deg); }
-  50% { transform: rotate(35deg); }
-  75% { transform: rotate(-25deg); }
+  0%, 100% { transform: rotate(40deg); }
+  18% { transform: rotate(20deg); }
+  35% { transform: rotate(-25deg); }
+  50% { transform: rotate(40deg); }
+  68% { transform: rotate(20deg); }
+  85% { transform: rotate(-25deg); }
 }
 
-.animate .back-leg .thigh {
-  animation: back-thigh var(--speed) infinite linear;
+/* Thigh follows hip with slight delay */
+.animate .back-leg.right .thigh {
+  animation: back-thigh-r var(--speed) infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes back-thigh {
-  0%, 50%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-10deg); }
-  75% { transform: rotate(-10deg); }
+.animate .back-leg.left .thigh {
+  animation: back-thigh-l var(--speed) infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.animate .back-leg .lower-leg {
-  animation: back-lower var(--speed) infinite linear;
+@keyframes back-thigh-r {
+  0%, 100% { transform: rotate(5deg); }
+  25% { transform: rotate(-12deg); }
+  50% { transform: rotate(5deg); }
+  75% { transform: rotate(-12deg); }
 }
 
-@keyframes back-lower {
-  0%, 100% { transform: rotate(25deg); }
-  25% { transform: rotate(-25deg); }
-  50% { transform: rotate(25deg); }
-  75% { transform: rotate(-25deg); }
+@keyframes back-thigh-l {
+  0%, 100% { transform: rotate(-12deg); }
+  25% { transform: rotate(5deg); }
+  50% { transform: rotate(-12deg); }
+  75% { transform: rotate(5deg); }
+}
+
+/* Lower leg with powerful push-off motion */
+.animate .back-leg.right .lower-leg {
+  animation: back-lower-r var(--speed) infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate .back-leg.left .lower-leg {
+  animation: back-lower-l var(--speed) infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes back-lower-r {
+  0%, 100% { transform: rotate(20deg); }
+  15% { transform: rotate(30deg); }
+  30% { transform: rotate(-30deg); }
+  50% { transform: rotate(20deg); }
+  65% { transform: rotate(30deg); }
+  80% { transform: rotate(-30deg); }
+}
+
+@keyframes back-lower-l {
+  0%, 100% { transform: rotate(-30deg); }
+  15% { transform: rotate(-20deg); }
+  30% { transform: rotate(20deg); }
+  50% { transform: rotate(-30deg); }
+  65% { transform: rotate(-20deg); }
+  80% { transform: rotate(20deg); }
+}
+
+/* Back paw flex on ground contact */
+.animate .back-leg.right .paw {
+  animation: back-paw-r var(--speed) infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate .back-leg.left .paw {
+  animation: back-paw-l var(--speed) infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes back-paw-r {
+  0%, 100% { transform: rotate(8deg) scaleY(1); }
+  25% { transform: rotate(-12deg) scaleY(0.88); }  /* Ground contact - compress */
+  35% { transform: rotate(-5deg) scaleY(1); }
+  50% { transform: rotate(8deg) scaleY(1); }
+  75% { transform: rotate(-12deg) scaleY(0.88); }
+  85% { transform: rotate(-5deg) scaleY(1); }
+}
+
+@keyframes back-paw-l {
+  0%, 100% { transform: rotate(-12deg) scaleY(0.88); }
+  25% { transform: rotate(8deg) scaleY(1); }
+  35% { transform: rotate(3deg) scaleY(1); }
+  50% { transform: rotate(-12deg) scaleY(0.88); }
+  75% { transform: rotate(8deg) scaleY(1); }
+  85% { transform: rotate(3deg) scaleY(1); }
+}
+
+/* Back toe spread on ground contact */
+.animate .back-leg.right .toes {
+  animation: back-toes-r var(--speed) infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate .back-leg.left .toes {
+  animation: back-toes-l var(--speed) infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes back-toes-r {
+  0%, 100% { transform: scaleX(1); }
+  25% { transform: scaleX(1.12); }  /* Spread for grip */
+  50% { transform: scaleX(1); }
+  75% { transform: scaleX(1.12); }
+}
+
+@keyframes back-toes-l {
+  0%, 100% { transform: scaleX(1.12); }
+  25% { transform: scaleX(1); }
+  50% { transform: scaleX(1.12); }
+  75% { transform: scaleX(1); }
 }
 
 /* ================
@@ -746,7 +1021,7 @@ label {
 }
 
 .animate .tail {
-  animation: tail var(--speed) infinite linear;
+  animation: tail var(--speed) infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes tail {
@@ -757,7 +1032,7 @@ label {
 }
 
 .animate .tail .segment {
-  animation: tail-wave var(--speed) infinite linear;
+  animation: tail-wave var(--speed) infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes tail-wave {

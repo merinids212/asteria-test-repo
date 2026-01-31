@@ -1,0 +1,785 @@
+@charset "UTF-8";
+/*
+  Tiger Run - CSS Animation
+  Based on horse anatomy technique, rebuilt for feline form
+  Click the tiger for slow-mo :)
+*/
+
+:root {
+  font-size: 18vmin;
+  --outlines: transparent;
+  --speed: 0.6s;
+  --delay-gap: 10;
+  --tiger-width: 5rem;
+  --tiger-height: 2.2rem;
+  
+  /* Tiger colors - orange with black stripes */
+  --color-fur: #E87A1A;
+  --color-fur-light: #F5A54A;
+  --color-fur-dark: #C45E0A;
+  --color-belly: #F5DEB3;
+  --color-stripes: #1a1a1a;
+  --color-nose: #2a1810;
+  --color-eyes: #FFD700;
+  --color-paws: #C45E0A;
+  --color-dust: #AF540B;
+  --color-floor: transparent;
+}
+
+input[type=checkbox] {
+  opacity: 0;
+  position: absolute;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  cursor: pointer;
+}
+
+input[type=checkbox]:checked ~ label {
+  --outlines: rgba(255,255,255,0.3);
+  --speed: 6s;
+}
+
+* {
+  position: relative;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: url('/barbershop.png') center center / cover no-repeat fixed;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+label {
+  cursor: pointer;
+}
+
+/* Dust particles */
+.dust {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: calc(((100vh - var(--tiger-height)) / 2) + 0.02rem);
+  overflow: hidden;
+}
+
+.floor {
+  background-color: transparent;
+  position: fixed;
+  top: calc(50vh + (var(--tiger-height) / 2) - 0.3rem);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.dust .particle {
+  position: absolute;
+  background-color: var(--color-dust);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.dust.front .particle { z-index: 10; }
+.dust.back .particle { z-index: -1; }
+
+/* Particle animations */
+.dust .particle:nth-child(1) { animation: particle-1 var(--speed) infinite; }
+.dust .particle:nth-child(2) { animation: particle-2 var(--speed) infinite 0.05s; }
+.dust .particle:nth-child(3) { animation: particle-3 var(--speed) infinite 0.1s; }
+.dust .particle:nth-child(4) { animation: particle-4 var(--speed) infinite 0.15s; }
+.dust .particle:nth-child(5) { animation: particle-5 var(--speed) infinite 0.2s; }
+.dust .particle:nth-child(6) { animation: particle-1 var(--speed) infinite 0.25s; }
+.dust .particle:nth-child(7) { animation: particle-2 var(--speed) infinite 0.3s; }
+.dust .particle:nth-child(8) { animation: particle-3 var(--speed) infinite 0.35s; }
+.dust .particle:nth-child(9) { animation: particle-4 var(--speed) infinite 0.4s; }
+.dust .particle:nth-child(10) { animation: particle-5 var(--speed) infinite 0.45s; }
+.dust .particle:nth-child(11) { animation: particle-1 var(--speed) infinite 0.5s; }
+.dust .particle:nth-child(12) { animation: particle-2 var(--speed) infinite 0.55s; }
+.dust .particle:nth-child(13) { animation: particle-3 var(--speed) infinite 0.6s; }
+.dust .particle:nth-child(14) { animation: particle-4 var(--speed) infinite 0.65s; }
+.dust .particle:nth-child(15) { animation: particle-5 var(--speed) infinite 0.7s; }
+
+@keyframes particle-1 {
+  0%, 100% { transform: translate(30vw, 52vh); width: 4px; height: 4px; opacity: 0; }
+  10% { opacity: 0.8; }
+  50% { transform: translate(-20vw, 48vh); width: 2px; height: 2px; opacity: 0.4; }
+  100% { transform: translate(-50vw, 45vh); opacity: 0; }
+}
+
+@keyframes particle-2 {
+  0%, 100% { transform: translate(25vw, 54vh); width: 3px; height: 3px; opacity: 0; }
+  15% { opacity: 0.7; }
+  60% { transform: translate(-25vw, 50vh); width: 1px; height: 1px; opacity: 0.3; }
+  100% { transform: translate(-55vw, 47vh); opacity: 0; }
+}
+
+@keyframes particle-3 {
+  0%, 100% { transform: translate(28vw, 51vh); width: 5px; height: 5px; opacity: 0; }
+  12% { opacity: 0.9; }
+  55% { transform: translate(-22vw, 46vh); width: 2px; height: 2px; opacity: 0.5; }
+  100% { transform: translate(-48vw, 42vh); opacity: 0; }
+}
+
+@keyframes particle-4 {
+  0%, 100% { transform: translate(32vw, 53vh); width: 3px; height: 3px; opacity: 0; }
+  8% { opacity: 0.6; }
+  45% { transform: translate(-18vw, 49vh); width: 1px; height: 1px; opacity: 0.2; }
+  100% { transform: translate(-45vw, 46vh); opacity: 0; }
+}
+
+@keyframes particle-5 {
+  0%, 100% { transform: translate(27vw, 55vh); width: 4px; height: 4px; opacity: 0; }
+  18% { opacity: 0.75; }
+  58% { transform: translate(-24vw, 51vh); width: 2px; height: 2px; opacity: 0.35; }
+  100% { transform: translate(-52vw, 48vh); opacity: 0; }
+}
+
+/* ================
+   TIGER CONTAINER
+   ================ */
+
+.🐯 {
+  width: var(--tiger-width);
+  height: var(--tiger-height);
+  position: relative;
+  z-index: 1;
+}
+
+.🐯 > * {
+  position: absolute;
+  width: var(--part-width, 10%);
+  height: var(--part-height, 10%);
+  top: var(--part-y, 0);
+  left: var(--part-x, 0);
+  transform: rotate(var(--part-rotate, 0deg));
+  transform-origin: var(--part-origin, 50% 50%);
+  border: 1px solid var(--outlines);
+}
+
+.🐯 > * *, .🐯 > * *:after, .🐯 > * *:before {
+  position: absolute;
+  background: linear-gradient(135deg, var(--color-fur-light) 0%, var(--color-fur) 40%, var(--color-fur-dark) 100%);
+  top: var(--shape-y, 0);
+  left: var(--shape-x, 0);
+  width: var(--shape-width, 10px);
+  height: var(--shape-height, 10px);
+  border-radius: var(--shape-radius, 0);
+  transform: rotate(var(--shape-rotate, 0deg));
+  transform-origin: var(--shape-origin, 50% 50%);
+  box-shadow: inset 2px 2px 8px rgba(245, 165, 74, 0.3), inset -2px -2px 8px rgba(139, 69, 10, 0.4);
+}
+
+/* ================
+   BODY
+   ================ */
+
+.body {
+  --part-width: 60%;
+  --part-height: 40%;
+  --part-x: 18%;
+  --part-y: 28%;
+  --part-origin: 50% 50%;
+  z-index: 2;
+}
+
+.body .ribcage {
+  --shape-width: 45%;
+  --shape-height: 95%;
+  --shape-x: 5%;
+  --shape-y: 2%;
+  --shape-radius: 50% 45% 45% 50%;
+  background: linear-gradient(180deg, var(--color-fur-light) 0%, var(--color-fur) 50%, var(--color-fur-dark) 100%);
+}
+
+.body .belly {
+  --shape-width: 55%;
+  --shape-height: 80%;
+  --shape-x: 25%;
+  --shape-y: 12%;
+  --shape-radius: 45% 50% 50% 45%;
+  background: linear-gradient(180deg, var(--color-fur) 0%, var(--color-belly) 60%, var(--color-fur) 100%);
+}
+
+.body .hindquarters {
+  --shape-width: 35%;
+  --shape-height: 90%;
+  --shape-x: 60%;
+  --shape-y: 5%;
+  --shape-radius: 45% 55% 50% 45%;
+}
+
+/* Tiger stripes on body */
+.body .stripe {
+  position: absolute;
+  background: var(--color-stripes);
+  border-radius: 2px;
+  z-index: 5;
+}
+
+.body .stripe-1 {
+  width: 8%;
+  height: 50%;
+  top: 20%;
+  left: 15%;
+  transform: rotate(-15deg);
+}
+
+.body .stripe-2 {
+  width: 7%;
+  height: 45%;
+  top: 25%;
+  left: 28%;
+  transform: rotate(-10deg);
+}
+
+.body .stripe-3 {
+  width: 8%;
+  height: 48%;
+  top: 22%;
+  left: 42%;
+  transform: rotate(-5deg);
+}
+
+.body .stripe-4 {
+  width: 7%;
+  height: 42%;
+  top: 28%;
+  left: 56%;
+  transform: rotate(5deg);
+}
+
+.body .stripe-5 {
+  width: 8%;
+  height: 45%;
+  top: 24%;
+  left: 70%;
+  transform: rotate(10deg);
+}
+
+.animate .body {
+  animation: body var(--speed) infinite linear;
+}
+
+@keyframes body {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  25% { transform: translateY(-3%) rotate(0deg); }
+  50% { transform: translateY(0) rotate(2deg); }
+  75% { transform: translateY(-3%) rotate(0deg); }
+}
+
+/* ================
+   NECK
+   ================ */
+
+.neck {
+  --part-width: 18%;
+  --part-height: 35%;
+  --part-x: 8%;
+  --part-y: 20%;
+  --part-origin: 50% 100%;
+  z-index: 3;
+}
+
+.neck .throat {
+  --shape-width: 70%;
+  --shape-height: 90%;
+  --shape-x: 15%;
+  --shape-y: 5%;
+  --shape-radius: 40% 50% 50% 40%;
+  background: linear-gradient(90deg, var(--color-fur-dark) 0%, var(--color-belly) 50%, var(--color-fur-dark) 100%);
+}
+
+.neck .nape {
+  --shape-width: 80%;
+  --shape-height: 85%;
+  --shape-x: 10%;
+  --shape-y: 0%;
+  --shape-radius: 50% 50% 40% 40%;
+}
+
+.neck .ruff {
+  --shape-width: 90%;
+  --shape-height: 40%;
+  --shape-x: 5%;
+  --shape-y: 60%;
+  --shape-radius: 50%;
+  background: linear-gradient(180deg, var(--color-fur) 0%, var(--color-fur-light) 100%);
+}
+
+.animate .neck {
+  animation: neck var(--speed) infinite linear;
+}
+
+@keyframes neck {
+  0%, 100% { transform: rotate(-5deg); }
+  25% { transform: rotate(-8deg); }
+  50% { transform: rotate(-3deg); }
+  75% { transform: rotate(-8deg); }
+}
+
+/* ================
+   HEAD
+   ================ */
+
+.head {
+  --part-width: 22%;
+  --part-height: 28%;
+  --part-x: 0%;
+  --part-y: 8%;
+  --part-origin: 80% 80%;
+  z-index: 4;
+}
+
+.head .skull {
+  --shape-width: 85%;
+  --shape-height: 90%;
+  --shape-x: 8%;
+  --shape-y: 5%;
+  --shape-radius: 55% 50% 50% 55%;
+}
+
+.head .snout {
+  --shape-width: 45%;
+  --shape-height: 50%;
+  --shape-x: -5%;
+  --shape-y: 35%;
+  --shape-radius: 50% 40% 40% 50%;
+  background: linear-gradient(180deg, var(--color-fur) 0%, var(--color-belly) 70%);
+}
+
+.head .nose {
+  --shape-width: 18%;
+  --shape-height: 15%;
+  --shape-x: -2%;
+  --shape-y: 42%;
+  --shape-radius: 40%;
+  background: var(--color-nose) !important;
+  box-shadow: none !important;
+}
+
+.head .mouth {
+  --shape-width: 30%;
+  --shape-height: 8%;
+  --shape-x: 5%;
+  --shape-y: 65%;
+  --shape-radius: 0 0 50% 50%;
+  background: #2a1810 !important;
+}
+
+.head .cheek {
+  --shape-width: 40%;
+  --shape-height: 45%;
+  --shape-x: 45%;
+  --shape-y: 40%;
+  --shape-radius: 50%;
+  background: linear-gradient(135deg, var(--color-belly) 0%, var(--color-fur) 100%);
+}
+
+.head .ear {
+  --shape-width: 22%;
+  --shape-height: 28%;
+  --shape-radius: 50% 50% 20% 20%;
+  background: linear-gradient(180deg, var(--color-fur-dark) 0%, var(--color-fur) 40%, #FFD5C2 70%) !important;
+}
+
+.head .left-ear {
+  --shape-x: 25%;
+  --shape-y: -15%;
+  --shape-rotate: -15deg;
+}
+
+.head .right-ear {
+  --shape-x: 55%;
+  --shape-y: -12%;
+  --shape-rotate: 15deg;
+}
+
+.head .eye {
+  --shape-width: 12%;
+  --shape-height: 14%;
+  --shape-x: 35%;
+  --shape-y: 30%;
+  --shape-radius: 50%;
+  background: var(--color-eyes) !important;
+  box-shadow: inset 2px 2px 4px rgba(0,0,0,0.3), 0 0 8px rgba(255,215,0,0.5) !important;
+}
+
+.head .eye:after {
+  content: '';
+  position: absolute;
+  width: 40%;
+  height: 80%;
+  background: #1a1a1a !important;
+  border-radius: 50%;
+  top: 10%;
+  left: 30%;
+  box-shadow: none !important;
+}
+
+.head .whiskers {
+  --shape-width: 60%;
+  --shape-height: 3%;
+  --shape-x: -25%;
+  --shape-y: 50%;
+  background: rgba(255,255,255,0.8) !important;
+  box-shadow: 
+    0 8px 0 rgba(255,255,255,0.6),
+    0 16px 0 rgba(255,255,255,0.4) !important;
+}
+
+.head .forehead-stripe {
+  --shape-width: 15%;
+  --shape-height: 35%;
+  --shape-x: 40%;
+  --shape-y: 5%;
+  --shape-radius: 3px;
+  background: var(--color-stripes) !important;
+  box-shadow: 
+    -12px 5px 0 var(--color-stripes),
+    12px 5px 0 var(--color-stripes) !important;
+}
+
+.animate .head {
+  animation: head var(--speed) infinite linear;
+}
+
+@keyframes head {
+  0%, 100% { transform: rotate(5deg); }
+  25% { transform: rotate(8deg); }
+  50% { transform: rotate(3deg); }
+  75% { transform: rotate(8deg); }
+}
+
+/* ================
+   FRONT LEGS
+   ================ */
+
+.front-leg {
+  --part-width: 12%;
+  --part-height: 45%;
+  --part-y: 38%;
+  --part-origin: 50% 0%;
+  z-index: 1;
+}
+
+.front-leg.right {
+  --part-x: 15%;
+  z-index: 0;
+}
+
+.front-leg.left {
+  --part-x: 22%;
+  z-index: 3;
+}
+
+.front-leg .shoulder {
+  --shape-width: 100%;
+  --shape-height: 50%;
+  --shape-radius: 50% 50% 40% 40%;
+}
+
+.front-leg .upper {
+  --shape-width: 70%;
+  --shape-height: 55%;
+  --shape-x: 15%;
+  --shape-y: 35%;
+  --shape-radius: 40%;
+  --shape-origin: 50% 0%;
+}
+
+.front-leg .elbow {
+  --shape-width: 55%;
+  --shape-height: 20%;
+  --shape-x: 22%;
+  --shape-y: 80%;
+  --shape-radius: 50%;
+}
+
+.front-leg .lower {
+  --shape-width: 45%;
+  --shape-height: 50%;
+  --shape-x: 28%;
+  --shape-y: 90%;
+  --shape-radius: 35%;
+  --shape-origin: 50% 0%;
+}
+
+.front-leg .wrist {
+  --shape-width: 40%;
+  --shape-height: 15%;
+  --shape-x: 30%;
+  --shape-y: 130%;
+  --shape-radius: 50%;
+}
+
+.front-leg .paw {
+  --shape-width: 55%;
+  --shape-height: 18%;
+  --shape-x: 22%;
+  --shape-y: 140%;
+  --shape-radius: 45% 45% 40% 40%;
+  background: linear-gradient(180deg, var(--color-fur-dark) 0%, var(--color-paws) 100%);
+}
+
+.front-leg .toes {
+  --shape-width: 60%;
+  --shape-height: 30%;
+  --shape-x: 20%;
+  --shape-y: 60%;
+  --shape-radius: 50%;
+  background: var(--color-paws);
+}
+
+.animate .front-leg.right .shoulder {
+  animation: front-shoulder-r var(--speed) infinite linear;
+}
+
+.animate .front-leg.left .shoulder {
+  animation: front-shoulder-l var(--speed) infinite linear;
+}
+
+@keyframes front-shoulder-r {
+  0%, 100% { transform: rotate(25deg); }
+  25% { transform: rotate(-30deg); }
+  50% { transform: rotate(25deg); }
+  75% { transform: rotate(-30deg); }
+}
+
+@keyframes front-shoulder-l {
+  0%, 100% { transform: rotate(-30deg); }
+  25% { transform: rotate(25deg); }
+  50% { transform: rotate(-30deg); }
+  75% { transform: rotate(25deg); }
+}
+
+.animate .front-leg .upper {
+  animation: front-upper var(--speed) infinite linear;
+}
+
+@keyframes front-upper {
+  0%, 50%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(15deg); }
+  75% { transform: rotate(15deg); }
+}
+
+.animate .front-leg .lower {
+  animation: front-lower var(--speed) infinite linear;
+}
+
+@keyframes front-lower {
+  0%, 100% { transform: rotate(-20deg); }
+  25% { transform: rotate(30deg); }
+  50% { transform: rotate(-20deg); }
+  75% { transform: rotate(30deg); }
+}
+
+/* ================
+   BACK LEGS
+   ================ */
+
+.back-leg {
+  --part-width: 15%;
+  --part-height: 50%;
+  --part-y: 32%;
+  --part-origin: 50% 0%;
+  z-index: 1;
+}
+
+.back-leg.right {
+  --part-x: 58%;
+  z-index: 0;
+}
+
+.back-leg.left {
+  --part-x: 52%;
+  z-index: 3;
+}
+
+.back-leg .hip {
+  --shape-width: 100%;
+  --shape-height: 45%;
+  --shape-radius: 55% 50% 45% 50%;
+}
+
+.back-leg .thigh {
+  --shape-width: 80%;
+  --shape-height: 55%;
+  --shape-x: 10%;
+  --shape-y: 30%;
+  --shape-radius: 50% 45% 40% 45%;
+  --shape-origin: 50% 0%;
+}
+
+.back-leg .knee {
+  --shape-width: 50%;
+  --shape-height: 20%;
+  --shape-x: 25%;
+  --shape-y: 75%;
+  --shape-radius: 50%;
+}
+
+.back-leg .lower-leg {
+  --shape-width: 40%;
+  --shape-height: 55%;
+  --shape-x: 30%;
+  --shape-y: 85%;
+  --shape-radius: 35%;
+  --shape-origin: 50% 0%;
+}
+
+.back-leg .ankle {
+  --shape-width: 35%;
+  --shape-height: 15%;
+  --shape-x: 32%;
+  --shape-y: 130%;
+  --shape-radius: 50%;
+}
+
+.back-leg .paw {
+  --shape-width: 50%;
+  --shape-height: 16%;
+  --shape-x: 25%;
+  --shape-y: 140%;
+  --shape-radius: 45% 45% 40% 40%;
+  background: linear-gradient(180deg, var(--color-fur-dark) 0%, var(--color-paws) 100%);
+}
+
+.back-leg .toes {
+  --shape-width: 55%;
+  --shape-height: 30%;
+  --shape-x: 22%;
+  --shape-y: 60%;
+  --shape-radius: 50%;
+  background: var(--color-paws);
+}
+
+.animate .back-leg.right .hip {
+  animation: back-hip-r var(--speed) infinite linear;
+}
+
+.animate .back-leg.left .hip {
+  animation: back-hip-l var(--speed) infinite linear;
+}
+
+@keyframes back-hip-r {
+  0%, 100% { transform: rotate(-25deg); }
+  25% { transform: rotate(35deg); }
+  50% { transform: rotate(-25deg); }
+  75% { transform: rotate(35deg); }
+}
+
+@keyframes back-hip-l {
+  0%, 100% { transform: rotate(35deg); }
+  25% { transform: rotate(-25deg); }
+  50% { transform: rotate(35deg); }
+  75% { transform: rotate(-25deg); }
+}
+
+.animate .back-leg .thigh {
+  animation: back-thigh var(--speed) infinite linear;
+}
+
+@keyframes back-thigh {
+  0%, 50%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  75% { transform: rotate(-10deg); }
+}
+
+.animate .back-leg .lower-leg {
+  animation: back-lower var(--speed) infinite linear;
+}
+
+@keyframes back-lower {
+  0%, 100% { transform: rotate(25deg); }
+  25% { transform: rotate(-25deg); }
+  50% { transform: rotate(25deg); }
+  75% { transform: rotate(-25deg); }
+}
+
+/* ================
+   TAIL
+   ================ */
+
+.tail {
+  --part-width: 40%;
+  --part-height: 12%;
+  --part-x: 65%;
+  --part-y: 32%;
+  --part-origin: 0% 50%;
+  z-index: 0;
+}
+
+.tail .base {
+  --shape-width: 25%;
+  --shape-height: 100%;
+  --shape-radius: 50%;
+}
+
+.tail .segment {
+  --shape-width: 90%;
+  --shape-height: 85%;
+  --shape-x: 80%;
+  --shape-y: 8%;
+  --shape-radius: 50%;
+  --shape-origin: 0% 50%;
+}
+
+.tail .segment.tip {
+  --shape-width: 70%;
+  --shape-height: 70%;
+  background: linear-gradient(90deg, var(--color-fur) 0%, var(--color-stripes) 50%, var(--color-fur) 100%);
+}
+
+/* Tail stripe pattern */
+.tail .segment:nth-child(odd) {
+  background: linear-gradient(90deg, var(--color-fur) 20%, var(--color-stripes) 50%, var(--color-fur) 80%);
+}
+
+.animate .tail {
+  animation: tail var(--speed) infinite linear;
+}
+
+@keyframes tail {
+  0%, 100% { transform: rotate(-15deg); }
+  25% { transform: rotate(5deg); }
+  50% { transform: rotate(-15deg); }
+  75% { transform: rotate(5deg); }
+}
+
+.animate .tail .segment {
+  animation: tail-wave var(--speed) infinite linear;
+}
+
+@keyframes tail-wave {
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(8deg); }
+}
+
+/* Make right-side legs slightly darker for depth */
+.front-leg.right *, .back-leg.right * {
+  filter: brightness(0.85);
+}
+
+/* Stripe markings on legs */
+.front-leg .upper:after,
+.back-leg .thigh:after {
+  content: '';
+  position: absolute;
+  width: 80%;
+  height: 15%;
+  background: var(--color-stripes);
+  border-radius: 2px;
+  top: 30%;
+  left: 10%;
+  box-shadow: 0 200% 0 var(--color-stripes), 0 400% 0 var(--color-stripes);
+}

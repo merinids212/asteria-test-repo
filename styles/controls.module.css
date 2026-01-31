@@ -4,12 +4,12 @@
   right: 0;
   width: 360px;
   height: 100vh;
-  background: rgba(10, 10, 10, 0.95);
+  background: rgba(42, 42, 42, 0.95);
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
-  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 1px solid rgba(245, 240, 230, 0.15);
   padding: 0;
-  color: white;
+  color: #f5f0e6;
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
   box-shadow: -8px 0 40px rgba(0, 0, 0, 0.5);
   z-index: 1000;
@@ -24,11 +24,11 @@
 
 .header {
   padding: 32px 28px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(245, 240, 230, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(180deg, rgba(102, 126, 234, 0.05) 0%, transparent 100%);
+  background: linear-gradient(180deg, rgba(139, 90, 43, 0.1) 0%, transparent 100%);
 }
 
 .headerContent {
@@ -40,13 +40,13 @@
 .logoMark {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #8b5a2b 0%, #5c3d2e 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 16px rgba(139, 90, 43, 0.4);
 }
 
 .logoLines {
@@ -167,7 +167,7 @@
 }
 
 .value {
-  color: #667eea;
+  color: #c9a66b;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   font-size: 13px;
@@ -191,16 +191,16 @@
   appearance: none;
   width: 20px;
   height: 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #c9a66b 0%, #8b5a2b 100%);
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.5);
+  box-shadow: 0 2px 8px rgba(139, 90, 43, 0.5);
   transition: transform 0.2s ease;
 }
 
 .slider::-webkit-slider-thumb:hover {
   transform: scale(1.15);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.6);
+  box-shadow: 0 4px 12px rgba(139, 90, 43, 0.6);
 }
 
 .slider::-webkit-slider-thumb:active {
@@ -210,11 +210,11 @@
 .slider::-moz-range-thumb {
   width: 20px;
   height: 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #c9a66b 0%, #8b5a2b 100%);
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.5);
+  box-shadow: 0 2px 8px rgba(139, 90, 43, 0.5);
   transition: transform 0.2s ease;
 }
 
@@ -250,10 +250,10 @@
 }
 
 .modeButton.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #c9a66b 0%, #8b5a2b 100%);
   border-color: transparent;
   color: white;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 12px rgba(139, 90, 43, 0.4);
 }
 
 .colorGrid {
@@ -295,8 +295,8 @@
 }
 
 .colorButton.active {
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.5);
+  border-color: rgba(245, 240, 230, 0.3);
+  box-shadow: 0 4px 16px rgba(139, 90, 43, 0.5);
   transform: translateY(-2px);
 }
 
@@ -353,9 +353,9 @@
 }
 
 .checkbox:checked {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #c9a66b 0%, #8b5a2b 100%);
   border-color: transparent;
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 2px 8px rgba(139, 90, 43, 0.4);
 }
 
 .checkbox:checked::after {

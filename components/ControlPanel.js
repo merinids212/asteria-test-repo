@@ -3,12 +3,9 @@ import styles from '../styles/controls.module.css';
 
 export default function ControlPanel({ onChange }) {
   const [controls, setControls] = useState({
-    speed: 1.0,
-    density: 100,
-    colorScheme: 'aurora',
-    animationMode: 'logo',
-    cameraRotate: true,
-    glowIntensity: 0.7
+    rotationSpeed: 0.3,
+    extrusionDepth: 0.8,
+    showScanlines: true
   });
 
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -21,12 +18,9 @@ export default function ControlPanel({ onChange }) {
 
   const resetControls = () => {
     const defaults = {
-      speed: 1.0,
-      density: 100,
-      colorScheme: 'aurora',
-      animationMode: 'logo',
-      cameraRotate: true,
-      glowIntensity: 0.7
+      rotationSpeed: 0.3,
+      extrusionDepth: 0.8,
+      showScanlines: true
     };
     setControls(defaults);
     onChange(defaults);
@@ -48,7 +42,7 @@ export default function ControlPanel({ onChange }) {
             <p className={styles.subtitle}>Est. 1858</p>
           </div>
         </div>
-        <button 
+        <button
           className={styles.collapseButton}
           onClick={() => setIsCollapsed(!isCollapsed)}
           aria-label={isCollapsed ? "Expand panel" : "Collapse panel"}
@@ -60,96 +54,50 @@ export default function ControlPanel({ onChange }) {
       {!isCollapsed && (
         <>
           <div className={styles.controls}>
-            {/* Animation Speed */}
+            {/* Rotation Speed */}
             <div className={styles.controlGroup}>
               <label className={styles.label}>
-                <span>Animation Speed</span>
-                <span className={styles.value}>{controls.speed.toFixed(1)}×</span>
-              </label>
-              <input
-                type="range"
-                min="0.1"
-                max="3"
-                step="0.1"
-                value={controls.speed}
-                onChange={(e) => updateControl('speed', parseFloat(e.target.value))}
-                className={styles.slider}
-              />
-            </div>
-
-            {/* Glow Intensity */}
-            <div className={styles.controlGroup}>
-              <label className={styles.label}>
-                <span>Glow Intensity</span>
-                <span className={styles.value}>{Math.floor(controls.glowIntensity * 100)}%</span>
+                <span>Rotation Speed</span>
+                <span className={styles.value}>{controls.rotationSpeed.toFixed(1)}×</span>
               </label>
               <input
                 type="range"
                 min="0"
                 max="1"
-                step="0.05"
-                value={controls.glowIntensity}
-                onChange={(e) => updateControl('glowIntensity', parseFloat(e.target.value))}
+                step="0.1"
+                value={controls.rotationSpeed}
+                onChange={(e) => updateControl('rotationSpeed', parseFloat(e.target.value))}
                 className={styles.slider}
               />
             </div>
 
-            {/* Animation Mode */}
+            {/* Extrusion Depth */}
             <div className={styles.controlGroup}>
               <label className={styles.label}>
-                <span>Animation Mode</span>
+                <span>Extrusion Depth</span>
+                <span className={styles.value}>{controls.extrusionDepth.toFixed(1)}</span>
               </label>
-              <div className={styles.buttonGroup}>
-                {['logo', 'rotate', 'pulse'].map(mode => (
-                  <button
-                    key={mode}
-                    className={`${styles.modeButton} ${controls.animationMode === mode ? styles.active : ''}`}
-                    onClick={() => updateControl('animationMode', mode)}
-                  >
-                    {mode.charAt(0).toUpperCase() + mode.slice(1)}
-                  </button>
-                ))}
-              </div>
+              <input
+                type="range"
+                min="0.2"
+                max="2"
+                step="0.1"
+                value={controls.extrusionDepth}
+                onChange={(e) => updateControl('extrusionDepth', parseFloat(e.target.value))}
+                className={styles.slider}
+              />
             </div>
 
-            {/* Color Scheme */}
-            <div className={styles.controlGroup}>
-              <label className={styles.label}>
-                <span>Color Palette</span>
-              </label>
-              <div className={styles.colorGrid}>
-                {[
-                  { id: 'aurora', label: 'Aurora', colors: ['#667eea', '#764ba2'] },
-                  { id: 'neon', label: 'Neon', colors: ['#ff006e', '#ffbe0b'] },
-                  { id: 'monochrome', label: 'Mono', colors: ['#ffffff', '#888888'] },
-                  { id: 'asteria', label: 'Asteria', colors: ['#667eea', '#4a5db8'] }
-                ].map(scheme => (
-                  <button
-                    key={scheme.id}
-                    className={`${styles.colorButton} ${controls.colorScheme === scheme.id ? styles.active : ''}`}
-                    onClick={() => updateControl('colorScheme', scheme.id)}
-                    style={{
-                      background: controls.colorScheme === scheme.id
-                        ? `linear-gradient(135deg, ${scheme.colors[0]}, ${scheme.colors[1]})`
-                        : 'rgba(255, 255, 255, 0.05)'
-                    }}
-                  >
-                    <span className={styles.colorLabel}>{scheme.label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Camera Rotation */}
+            {/* Scanlines Toggle */}
             <div className={styles.controlGroup}>
               <label className={styles.toggleLabel}>
                 <input
                   type="checkbox"
-                  checked={controls.cameraRotate}
-                  onChange={(e) => updateControl('cameraRotate', e.target.checked)}
+                  checked={controls.showScanlines}
+                  onChange={(e) => updateControl('showScanlines', e.target.checked)}
                   className={styles.checkbox}
                 />
-                <span>Dynamic Camera Movement</span>
+                <span>Show Scanlines</span>
               </label>
             </div>
 

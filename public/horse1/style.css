@@ -42,7 +42,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background: #00FF00;
+  background: url('/barbershop.png') center center / cover no-repeat fixed;
 }
 
 body {
@@ -68,8 +68,8 @@ label {
 }
 
 .floor {
-  background-color: #00FF00;
-  background: #00FF00;
+  background-color: transparent;
+  background: transparent;
   position: fixed;
   top: calc(50vh + (var(--horse-height) / 2) - 0.5rem);
   left: 0;

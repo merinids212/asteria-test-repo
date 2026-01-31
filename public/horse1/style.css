@@ -42,8 +42,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(30%, #ffa44e), to(#00d4ff));
-  background: linear-gradient(0deg, #ffa44e 30%, #00d4ff 100%);
+  background: #00FF00;
 }
 
 body {
@@ -69,8 +68,8 @@ label {
 }
 
 .floor {
-  background-color: var(--color-floor);
-  background: linear-gradient(9deg, #e8d9be 0%, #A95108 100%);
+  background-color: #00FF00;
+  background: #00FF00;
   position: fixed;
   top: calc(50vh + (var(--horse-height) / 2) - 0.5rem);
   left: 0;

@@ -10,28 +10,6 @@ export default function Home() {
 
       <main>
         <div className="container">
-          {/* Geometric Horse Head Logo */}
-          <div className="logo">
-            <svg viewBox="0 0 200 200" className="logomark">
-              {/* Abstract horse head using geometric shapes */}
-              <rect x="40" y="80" width="120" height="100" fill="black"/>
-              {/* Neck angle */}
-              <polygon points="40,80 40,180 0,180 0,120" fill="black"/>
-              {/* Head */}
-              <rect x="60" y="20" width="80" height="70" fill="black"/>
-              {/* Ear */}
-              <polygon points="120,20 140,0 140,30" fill="black"/>
-              {/* Eye cutout */}
-              <circle cx="100" cy="50" r="12" fill="#f5f5f0"/>
-              {/* Nostril */}
-              <circle cx="75" cy="70" r="6" fill="#f5f5f0"/>
-              {/* Horizontal lines through body */}
-              <line x1="0" y1="130" x2="160" y2="130" stroke="#f5f5f0" strokeWidth="4"/>
-              <line x1="0" y1="145" x2="160" y2="145" stroke="#f5f5f0" strokeWidth="4"/>
-              <line x1="0" y1="160" x2="160" y2="160" stroke="#f5f5f0" strokeWidth="4"/>
-            </svg>
-          </div>
-
           <div className="wordmark">
             <h1>HORSE</h1>
             <div className="stripe-accent">
@@ -76,15 +54,6 @@ export default function Home() {
           display: flex;
           flex-direction: column;
           align-items: center;
-        }
-
-        .logo {
-          margin-bottom: 2rem;
-        }
-
-        .logomark {
-          width: 140px;
-          height: 140px;
         }
 
         .wordmark {
@@ -176,10 +145,6 @@ export default function Home() {
           h1 {
             font-size: 2.5rem;
             letter-spacing: 0.3em;
-          }
-          .logomark {
-            width: 100px;
-            height: 100px;
           }
           .name {
             font-size: 0.9rem;

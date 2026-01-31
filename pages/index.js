@@ -6,41 +6,54 @@ export default function Home() {
       <Head>
         <title>Horse Animations</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet" />
       </Head>
 
       <main>
         <div className="container">
-          <header>
-            <div className="logo">
-              <div className="logo-mark">
-                <div className="circle"></div>
-                <div className="circle"></div>
-                <div className="circle"></div>
-                <div className="circle"></div>
-              </div>
-            </div>
+          {/* Geometric Horse Head Logo */}
+          <div className="logo">
+            <svg viewBox="0 0 200 200" className="logomark">
+              {/* Abstract horse head using geometric shapes */}
+              <rect x="40" y="80" width="120" height="100" fill="black"/>
+              {/* Neck angle */}
+              <polygon points="40,80 40,180 0,180 0,120" fill="black"/>
+              {/* Head */}
+              <rect x="60" y="20" width="80" height="70" fill="black"/>
+              {/* Ear */}
+              <polygon points="120,20 140,0 140,30" fill="black"/>
+              {/* Eye cutout */}
+              <circle cx="100" cy="50" r="12" fill="#f5f5f0"/>
+              {/* Nostril */}
+              <circle cx="75" cy="70" r="6" fill="#f5f5f0"/>
+              {/* Horizontal lines through body */}
+              <line x1="0" y1="130" x2="160" y2="130" stroke="#f5f5f0" strokeWidth="4"/>
+              <line x1="0" y1="145" x2="160" y2="145" stroke="#f5f5f0" strokeWidth="4"/>
+              <line x1="0" y1="160" x2="160" y2="160" stroke="#f5f5f0" strokeWidth="4"/>
+            </svg>
+          </div>
+
+          <div className="wordmark">
             <h1>HORSE</h1>
-            <p className="subtitle">ANIMATIONS</p>
-          </header>
+            <div className="stripe-accent">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
 
           <nav className="links">
-            <a href="/horse1/" className="link-card">
-              <span className="number">01</span>
-              <span className="title">CLIP CLOP</span>
-              <span className="desc">Pure CSS</span>
+            <a href="/horse1/">
+              <span className="num">01</span>
+              <span className="name">CLIP CLOP</span>
+              <span className="tag">CSS</span>
             </a>
-            <a href="/horse2/" className="link-card">
-              <span className="number">02</span>
-              <span className="title">NIGHT MARE</span>
-              <span className="desc">p5.js + ML5</span>
+            <a href="/horse2/">
+              <span className="num">02</span>
+              <span className="name">NIGHT MARE</span>
+              <span className="tag">P5.JS</span>
             </a>
           </nav>
 
           <footer>
-            <span>2025</span>
+            <span className="year">2025</span>
           </footer>
         </div>
       </main>
@@ -51,119 +64,125 @@ export default function Home() {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+          font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
           background: #f5f5f0;
           color: #000;
-          padding: 2rem;
+          padding: 3rem 2rem;
         }
 
         .container {
-          max-width: 600px;
+          max-width: 400px;
           width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
 
-        header {
+        .logo {
+          margin-bottom: 2rem;
+        }
+
+        .logomark {
+          width: 140px;
+          height: 140px;
+        }
+
+        .wordmark {
           text-align: center;
           margin-bottom: 4rem;
         }
 
-        .logo {
+        h1 {
+          font-size: 3.5rem;
+          font-weight: 800;
+          letter-spacing: 0.4em;
+          margin: 0 0 0.75rem -0.4em;
+          padding-left: 0.4em;
+        }
+
+        .stripe-accent {
           display: flex;
           justify-content: center;
-          margin-bottom: 2rem;
+          gap: 6px;
         }
 
-        .logo-mark {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 4px;
-          width: 64px;
-          height: 64px;
-        }
-
-        .circle {
+        .stripe-accent span {
+          display: block;
+          width: 40px;
+          height: 3px;
           background: #000;
-          border-radius: 50%;
-        }
-
-        h1 {
-          font-size: 4rem;
-          font-weight: 900;
-          letter-spacing: 0.2em;
-          margin: 0;
-          line-height: 1;
-        }
-
-        .subtitle {
-          font-size: 1rem;
-          font-weight: 400;
-          letter-spacing: 0.5em;
-          margin: 0.5rem 0 0;
-          color: #666;
         }
 
         .links {
+          width: 100%;
           display: flex;
           flex-direction: column;
-          gap: 1px;
-          background: #000;
-          border: 2px solid #000;
+          border: 3px solid #000;
         }
 
-        .link-card {
-          display: grid;
-          grid-template-columns: 60px 1fr auto;
+        .links a {
+          display: flex;
           align-items: center;
-          padding: 1.5rem;
-          background: #f5f5f0;
+          padding: 1.25rem 1.5rem;
           color: #000;
           text-decoration: none;
-          transition: all 0.15s ease;
+          border-bottom: 3px solid #000;
+          transition: all 0.1s ease;
         }
 
-        .link-card:hover {
+        .links a:last-child {
+          border-bottom: none;
+        }
+
+        .links a:hover {
           background: #000;
           color: #f5f5f0;
         }
 
-        .number {
-          font-size: 0.875rem;
+        .num {
+          font-size: 0.75rem;
           font-weight: 700;
-          letter-spacing: 0.1em;
-        }
-
-        .title {
-          font-size: 1.25rem;
-          font-weight: 900;
+          width: 36px;
           letter-spacing: 0.05em;
         }
 
-        .desc {
-          font-size: 0.75rem;
-          font-weight: 400;
+        .name {
+          flex: 1;
+          font-size: 1.1rem;
+          font-weight: 700;
+          letter-spacing: 0.15em;
+        }
+
+        .tag {
+          font-size: 0.65rem;
+          font-weight: 600;
           letter-spacing: 0.1em;
-          text-transform: uppercase;
-          opacity: 0.6;
+          padding: 0.25rem 0.5rem;
+          border: 2px solid currentColor;
         }
 
         footer {
           margin-top: 4rem;
-          text-align: center;
-          font-size: 0.75rem;
-          letter-spacing: 0.2em;
+        }
+
+        .year {
+          font-size: 0.8rem;
+          font-weight: 500;
+          letter-spacing: 0.3em;
           color: #999;
         }
 
         @media (max-width: 480px) {
           h1 {
             font-size: 2.5rem;
+            letter-spacing: 0.3em;
           }
-          .link-card {
-            grid-template-columns: 40px 1fr;
-            gap: 0.5rem;
+          .logomark {
+            width: 100px;
+            height: 100px;
           }
-          .desc {
-            display: none;
+          .name {
+            font-size: 0.9rem;
           }
         }
       `}</style>
